@@ -1,0 +1,35 @@
+[
+  {
+    "id": "session-1",
+    "taskId": "task-1",
+    "courseId": "cs401",
+    "title": "Graph algorithms revision",
+    "start": "2026-04-09T18:00:00",
+    "end": "2026-04-09T19:30:00",
+    "sessionType": "FOCUS",
+    "priorityScore": 13.5,
+    "completed": true
+  },
+  {
+    "id": "session-2",
+    "taskId": "task-3",
+    "courseId": "ml210",
+    "title": "Regression lab write-up",
+    "start": "2026-04-10T07:30:00",
+    "end": "2026-04-10T08:30:00",
+    "sessionType": "REVIEW",
+    "priorityScore": 8.0,
+    "completed": true
+  },
+  {
+    "id": "session-3",
+    "taskId": "task-2",
+    "courseId": "se302",
+    "title": "Architecture case study",
+    "start": "2026-04-10T20:00:00",
+    "end": "2026-04-10T21:00:00",
+    "sessionType": "FOCUS",
+    "priorityScore": 11.0,
+    "completed": false
+  }
+]

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.studycoach.infrastructure.persistence.JsonStudyCoachRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-05-21T08:37:33" hostname="urwas-MacBook-Pro-2.local" time="0.487">
+  <properties/>
+  <testcase name="roundTripPreservesTasksPlansAndConfig()" classname="com.studycoach.infrastructure.persistence.JsonStudyCoachRepositoryTest" time="0.487"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "task-1",
+    "courseId": "cs401",
+    "title": "Graph algorithms revision",
+    "description": "Prepare Dijkstra, MST and shortest path notes",
+    "difficulty": 5,
+    "importance": 5,
+    "estimatedHours": 6.0,
+    "completedHours": 1.5,
+    "deadline": "2026-06-05T21:00:00",
+    "status": "PARTIAL",
+    "lastUpdated": "2026-06-01T19:10:00"
+  },
+  {
+    "id": "task-2",
+    "courseId": "se302",
+    "title": "Architecture case study",
+    "description": "Draft clean architecture tradeoffs",
+    "difficulty": 4,
+    "importance": 4,
+    "estimatedHours": 5.0,
+    "completedHours": 0.0,
+    "deadline": "2026-06-09T18:00:00",
+    "status": "SKIPPED",
+    "lastUpdated": "2026-06-01T20:00:00"
+  },
+  {
+    "id": "task-3",
+    "courseId": "ml210",
+    "title": "Regression lab write-up",
+    "description": "Finish experiment discussion",
+    "difficulty": 3,
+    "importance": 4,
+    "estimatedHours": 4.0,
+    "completedHours": 1.0,
+    "deadline": "2026-06-12T23:00:00",
+    "status": "PARTIAL",
+    "lastUpdated": "2026-06-02T17:40:00"
+  },
+  {
+    "id": "task-4",
+    "courseId": "cs401",
+    "title": "Dynamic programming drill",
+    "description": "Solve 6 medium-hard questions",
+    "difficulty": 5,
+    "importance": 5,
+    "estimatedHours": 7.0,
+    "completedHours": 2.0,
+    "deadline": "2026-06-18T20:00:00",
+    "status": "PARTIAL",
+    "lastUpdated": "2026-06-03T21:30:00"
+  }
+]

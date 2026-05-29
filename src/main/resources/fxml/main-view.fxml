@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.studycoach.presentation.controller.MainController"
+            prefWidth="1540"
+            prefHeight="980"
+            styleClass="app-shell">
+
+    <left>
+        <VBox prefWidth="300" spacing="18" styleClass="sidebar">
+            <padding>
+                <Insets top="26" right="18" bottom="24" left="18"/>
+            </padding>
+
+            <VBox spacing="8" styleClass="brand-card">
+                <Label text="FocusForge" styleClass="brand-title"/>
+                <Label text="A deep work companion for students." wrapText="true" styleClass="brand-copy"/>
+            </VBox>
+
+            <VBox spacing="10">
+                <Button fx:id="todayNavButton"
+                        text="🏠  Home"
+                        onAction="#onShowToday"
+                        maxWidth="Infinity"
+                        styleClass="nav-button nav-button-active"/>
+
+                <Button fx:id="focusNavButton"
+                        text="🎧  Focus"
+                        onAction="#onShowFocus"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+
+                <Button fx:id="tasksNavButton"
+                        text="📝  Tasks"
+                        onAction="#onShowTasks"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+
+                <Button fx:id="scheduleNavButton"
+                        text="📅  Schedule"
+                        onAction="#onShowSchedule"
+                        maxWidth="Infinity"
+                        styleClass="nav-button"/>
+            </VBox>
+
+            <Label fx:id="bannerLabel" wrapText="true" styleClass="banner-text"/>
+            <Region VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20" styleClass="workspace-shell">
+            <padding>
+                <Insets top="24" right="26" bottom="24" left="26"/>
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="18">
+                <VBox spacing="4">
+                    <Label fx:id="workspaceTitleLabel" text="Home" styleClass="workspace-title"/>
+                    <Label fx:id="workspaceSubtitleLabel" text="Choose one thing. Start small." styleClass="workspace-subtitle"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <VBox alignment="CENTER_RIGHT"
+                      spacing="4"
+                      styleClass="student-chip clickable"
+                      onMouseClicked="#onOpenProfile">
+                    <Label text="Current Profile" styleClass="chip-kicker"/>
+                    <Label fx:id="studentLabel" styleClass="chip-title"/>
+                </VBox>
+            </HBox>
+
+            <StackPane fx:id="screenStack" VBox.vgrow="ALWAYS">
+
+                <!-- HOME SCREEN -->
+                <ScrollPane fx:id="todayScreen" fitToWidth="true" styleClass="plain-scroll">
+                    <content>
+                        <VBox spacing="22" styleClass="screen-pane content-surface home-dashboard">
+
+	                            <VBox spacing="4">
+	                                <Label fx:id="todayHeadlineLabel" wrapText="true" styleClass="greeting-title"/>
+	                            </VBox>
+
+                            <!-- KPI STRIP -->
+                            <HBox spacing="14" styleClass="home-stat-row">
+                                <VBox HBox.hgrow="ALWAYS" spacing="6" styleClass="home-kpi-card kpi-lavender">
+                                    <Label text="📚 Active targets" styleClass="muted"/>
+                                    <Label fx:id="homeActiveTargetsLabel" text="0 active" styleClass="stat-value"/>
+                                </VBox>
+
+                                <VBox HBox.hgrow="ALWAYS" spacing="6" styleClass="home-kpi-card kpi-peach">
+                                    <Label text="⏳ Due this week" styleClass="muted"/>
+                                    <Label fx:id="homeDueSoonLabel" text="0 due soon" styleClass="stat-value"/>
+                                </VBox>
+
+                                <VBox HBox.hgrow="ALWAYS" spacing="6" styleClass="home-kpi-card kpi-mint">
+                                    <Label text="✅ Completed" styleClass="muted"/>
+                                    <Label fx:id="homeCompletedTargetsLabel" text="0 completed" styleClass="stat-value"/>
+                                </VBox>
+
+	                            </HBox>
+
+                            <!-- MAIN VISUAL DASHBOARD -->
+                            <HBox spacing="18" fillHeight="false">
+
+                                <!-- LEFT COLUMN -->
+                                <VBox spacing="16" HBox.hgrow="ALWAYS" prefWidth="760" maxWidth="Infinity">
+
+                                    <!-- BIG HERO CARD -->
+                                    <HBox spacing="18" styleClass="home-focus-showcase">
+                                        <VBox spacing="12" HBox.hgrow="ALWAYS">
+                                            <Label fx:id="homeHeroKickerLabel"
+                                                text="Today’s Focus Recommendation"
+                                                styleClass="hero-kicker"/>
+
+                                            <Label fx:id="homeHeroTaskLabel"
+                                                wrapText="true"
+                                                styleClass="hero-title"/>
+
+                                            <Label fx:id="homeHeroMetaLabel"
+                                                wrapText="true"
+                                                styleClass="hero-meta"/>
+
+                                            <Label text="No pressure — protect one small session."
+                                                wrapText="true"
+                                                styleClass="hero-support"/>
+
+                                            <HBox spacing="10">
+                                                <Button fx:id="homeStartFocusButton"
+                                                        text="Start Focus"
+                                                        onAction="#onJumpToFocus"
+                                                        styleClass="hero-primary-button"/>
+
+                                                <Button fx:id="homeViewTasksButton"
+                                                        text="View Tasks"
+                                                        onAction="#onJumpToSchedule"
+                                                        styleClass="hero-secondary-button"/>
+
+                                                <Button fx:id="homeAddTargetButton"
+                                                        text="Add Target"
+                                                        onAction="#onJumpToSchedule"
+                                                        styleClass="hero-secondary-button"/>
+                                            </HBox>
+
+                                        </VBox>
+
+                                        <!-- VISUAL ORB SIDE -->
+                                        <StackPane prefWidth="210" minWidth="190" maxWidth="210" styleClass="focus-orb-card">
+                                            <Region styleClass="focus-orb-outer-home"/>
+                                            <Region styleClass="focus-orb-inner-home"/>
+                                            <VBox alignment="CENTER" spacing="6">
+                                                <Label text="25" styleClass="focus-orb-number"/>
+                                                <Label text="minute block" styleClass="focus-orb-label"/>
+                                            </VBox>
+                                        </StackPane>
+                                    </HBox>
+
+	                                    <!-- RHYTHM + GARDEN ROW -->
+	                                    <HBox spacing="14">
+	                                        <VBox HBox.hgrow="ALWAYS" spacing="10" styleClass="garden-preview-card">
+	                                            <Label text="Focus Garden 🌱" styleClass="card-title"/>
+	                                            <Label fx:id="gardenStageLabel" text="First sprout" styleClass="stat-value"/>
+                                            <HBox spacing="6">
+                                                <Region styleClass="garden-dot garden-dot-active"/>
+                                                <Region styleClass="garden-dot"/>
+                                                <Region styleClass="garden-dot"/>
+                                                <Region styleClass="garden-dot"/>
+                                                <Region styleClass="garden-dot"/>
+                                            </HBox>
+                                            <Label text="Complete sessions to grow your garden."
+                                                wrapText="true"
+                                                styleClass="muted"/>
+                                        </VBox>
+                                    </HBox>
+
+                                    <!-- SMALL FOCUS STATS -->
+                                    <HBox spacing="14">
+                                        <VBox HBox.hgrow="ALWAYS" spacing="6" styleClass="home-mini-card">
+                                            <Label text="🔥 Streak" styleClass="muted"/>
+                                            <Label fx:id="focusStreakLabel" text="No streak yet" styleClass="stat-value"/>
+                                        </VBox>
+
+                                        <VBox HBox.hgrow="ALWAYS" spacing="6" styleClass="home-mini-card">
+                                            <Label text="🌱 This week" styleClass="muted"/>
+                                            <Label fx:id="weeklyFocusLabel" text="No sessions yet" styleClass="stat-value"/>
+                                        </VBox>
+                                    </HBox>
+                                </VBox>
+
+                                <!-- RIGHT COLUMN -->
+                                <VBox spacing="16" prefWidth="330" minWidth="310" maxWidth="330">
+
+	                                    <VBox spacing="10" styleClass="home-side-card">
+	                                        <Label text="Upcoming Deadlines" styleClass="card-title"/>
+
+	                                        <ListView fx:id="homeDeadlinesList"
+	                                                prefHeight="210"
+	                                                styleClass="task-list home-deadline-list"/>
+	                                    </VBox>
+
+                                    <VBox spacing="10" styleClass="home-side-card demo-card">
+                                        <Label text="Demo flow" styleClass="card-title"/>
+                                        <Label text="1. Add a target" styleClass="demo-step"/>
+                                        <Label text="2. Generate schedule" styleClass="demo-step"/>
+                                        <Label text="3. Start focus session" styleClass="demo-step"/>
+                                    </VBox>
+                                </VBox>
+                            </HBox>
+
+                            <!-- Hidden legacy panels kept only for controller wiring. -->
+                            <VBox visible="false" managed="false">
+                                <Label fx:id="profileSummaryLabel"/>
+                                <ListView fx:id="topPriorityList"/>
+                                <FlowPane fx:id="profileCoursesPane"/>
+                                <ListView fx:id="todayPlanList"/>
+                                <Label fx:id="progressLabel"/>
+                                <Label fx:id="riskLabel"/>
+                                <ComboBox fx:id="examCourseCombo"/>
+                                <TextField fx:id="examTitleField"/>
+                                <DatePicker fx:id="examDatePicker"/>
+                                <Spinner fx:id="examHourSpinner"/>
+                                <Spinner fx:id="examMinuteSpinner"/>
+                                <Spinner fx:id="examImportanceSpinner"/>
+                                <Spinner fx:id="examWeightSpinner"/>
+                                <ListView fx:id="examListView"/>
+                            </VBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+                <!-- TASKS SCREEN -->
+                <ScrollPane fx:id="tasksScreen"
+                            fitToWidth="true"
+                            visible="false"
+                            managed="false"
+                            styleClass="plain-scroll">
+                    <content>
+                        <VBox spacing="20" styleClass="screen-pane content-surface">
+	                            <HBox alignment="CENTER_LEFT" spacing="12">
+	                                <Label text="Tasks" styleClass="page-title"/>
+	                                <Region HBox.hgrow="ALWAYS"/>
+	                                <Button text="+ Add Target"
+	                                        onAction="#onPrepareTaskCreate"
+	                                        styleClass="primary-button"/>
+	                            </HBox>
+
+                            <HBox spacing="10">
+                                <Label fx:id="totalTargetsLabel" text="0 targets" styleClass="pill pill-lavender"/>
+                                <Label fx:id="dueSoonLabel" text="0 due soon" styleClass="pill pill-peach"/>
+                                <Label fx:id="completedTargetsLabel" text="0 completed" styleClass="pill pill-mint"/>
+                            </HBox>
+
+                            <HBox spacing="18">
+                                <VBox prefWidth="430" spacing="12" styleClass="card">
+                                    <HBox alignment="CENTER_LEFT">
+                                        <Label text="Your Targets" styleClass="card-title"/>
+                                    </HBox>
+
+                                    <ListView fx:id="timelineList"
+                                              VBox.vgrow="ALWAYS"
+                                              styleClass="task-list"/>
+
+                                    <Label text="Choose one target to edit or start a focus block."
+                                           wrapText="true"
+                                           styleClass="muted"/>
+                                </VBox>
+
+                                <VBox HBox.hgrow="ALWAYS" spacing="14" styleClass="card">
+                                    <Label text="Target Editor" styleClass="card-title"/>
+                                    <Label text="Pick a target to refine, or create a new one for your next focus block."
+                                           wrapText="true"
+                                           styleClass="muted"/>
+
+                                    <Label fx:id="selectedTaskLabel" wrapText="true" styleClass="muted"/>
+
+                                    <ComboBox fx:id="courseCombo" promptText="Course"/>
+                                    <TextField fx:id="taskTitleField" promptText="Focus target title"/>
+                                    <TextArea fx:id="taskDescriptionArea"
+                                              promptText="Description"
+                                              prefRowCount="4"
+                                              wrapText="true"/>
+
+                                    <Label text="Deadline" styleClass="muted"/>
+
+                                    <HBox spacing="10">
+                                        <DatePicker fx:id="taskDeadlineDatePicker" prefWidth="180"/>
+                                        <Spinner fx:id="taskDeadlineHourSpinner"
+                                                 prefWidth="90"
+                                                 editable="true"
+                                                 visible="false"
+                                                 managed="false"/>
+                                        <Spinner fx:id="taskDeadlineMinuteSpinner"
+                                                 prefWidth="90"
+                                                 editable="true"
+                                                 visible="false"
+                                                 managed="false"/>
+                                    </HBox>
+
+                                    <HBox spacing="10">
+                                        <Button text="Add Target"
+                                                onAction="#onAddTask"
+                                                styleClass="primary-button"/>
+
+                                        <Button text="Update Target"
+                                                onAction="#onUpdateTask"
+                                                styleClass="secondary-button"/>
+
+                                        <Button text="Delete"
+                                                onAction="#onDeleteTask"
+                                                styleClass="secondary-button"/>
+                                    </HBox>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <!-- SCHEDULE SCREEN -->
+                <ScrollPane fx:id="scheduleScreen"
+                            fitToWidth="true"
+                            visible="false"
+                            managed="false"
+                            styleClass="plain-scroll">
+                    <content>
+                        <VBox spacing="20" styleClass="screen-pane content-surface">
+
+	                            <HBox alignment="CENTER_LEFT" spacing="12">
+	                                <VBox spacing="4">
+	                                    <Label text="Schedule" styleClass="page-title"/>
+	                                </VBox>
+
+                                <Region HBox.hgrow="ALWAYS"/>
+
+                                <ChoiceBox fx:id="strategyChoice" prefWidth="240"/>
+
+                                <Button fx:id="generateButton"
+                                        text="Generate Plan"
+                                        onAction="#onGenerateSchedule"
+                                        styleClass="primary-button"/>
+                            </HBox>
+
+	                            <VBox spacing="12" styleClass="card schedule-panel-card">
+	                                <HBox alignment="CENTER_LEFT">
+	                                    <Label text="Generated Focus Path" styleClass="card-title"/>
+	                                    <Region HBox.hgrow="ALWAYS"/>
+                                    <Button text="Add Target"
+                                            onAction="#onPrepareTaskCreate"
+                                            styleClass="secondary-button"/>
+                                </HBox>
+
+	                                <GridPane fx:id="scheduleGrid"
+	                                          hgap="12"
+	                                          vgap="12"/>
+	                            </VBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <!-- FOCUS SCREEN -->
+                <ScrollPane fx:id="focusScreen"
+                            fitToWidth="true"
+                            visible="false"
+                            managed="false"
+                            styleClass="plain-scroll">
+                    <content>
+                        <VBox spacing="22" styleClass="screen-pane content-surface">
+                            <HBox spacing="18">
+                                <VBox prefWidth="380" spacing="14" styleClass="panel-card accent-panel">
+                                    <Label text="Deep Work Setup" styleClass="panel-title"/>
+
+                                    <Label fx:id="lastReflectionLabel"
+                                           wrapText="true"
+                                           text="Reflect after your next session to build a better rhythm."
+                                           styleClass="panel-meta"/>
+
+                                    <ComboBox fx:id="focusTaskCombo" promptText="Select a focus target"/>
+                                    <Spinner fx:id="focusMinutesSpinner" prefWidth="120" editable="true"/>
+
+                                    <HBox spacing="10">
+                                        <Button fx:id="focusSoundToggleButton"
+                                                text="Rain Sound: Off"
+                                                onAction="#onToggleFocusSound"
+                                                styleClass="secondary-button"/>
+
+                                        <Label fx:id="focusSoundModeLabel"
+                                               text="Ambient"
+                                               styleClass="panel-meta"/>
+                                    </HBox>
+
+                                    <HBox spacing="10">
+                                        <Button text="Start"
+                                                onAction="#onStartFocusSession"
+                                                styleClass="primary-button"/>
+
+                                        <Button fx:id="focusPauseButton"
+                                                text="Pause"
+                                                onAction="#onToggleFocusPause"
+                                                styleClass="secondary-button"/>
+
+                                        <Button text="Stop"
+                                                onAction="#onStopFocusSession"
+                                                styleClass="secondary-button"/>
+                                    </HBox>
+
+	                                    <Label text="Reflection" styleClass="panel-meta"/>
+
+                                    <HBox spacing="10">
+                                        <Button fx:id="focusReflectionGreatButton"
+                                                text="Great"
+                                                onAction="#onReflectionGreat"
+                                                styleClass="secondary-button reflection-button reflection-great"/>
+
+                                        <Button fx:id="focusReflectionOkayButton"
+                                                text="Okay"
+                                                onAction="#onReflectionOkay"
+                                                styleClass="secondary-button reflection-button reflection-okay"/>
+
+                                        <Button fx:id="focusReflectionDistractedButton"
+                                                text="Distracted"
+                                                onAction="#onReflectionDistracted"
+                                                styleClass="secondary-button reflection-button reflection-distracted"/>
+                                    </HBox>
+
+	                                    <Label text="Choose one target. Protect one session. Reflect before moving on."
+	                                           wrapText="true"
+	                                           styleClass="panel-meta"/>
+	                                </VBox>
+
+                                <StackPane fx:id="focusPulseStage"
+                                           HBox.hgrow="ALWAYS"
+                                           minHeight="640"
+                                           styleClass="panel-card focus-stage">
+
+                                    <Region fx:id="focusPulseOuter" styleClass="pulse-orb pulse-orb-outer"/>
+                                    <Region fx:id="focusPulseInner" styleClass="pulse-orb pulse-orb-inner"/>
+
+                                    <VBox alignment="CENTER" spacing="16">
+                                        <Label fx:id="focusSelectedTaskLabel"
+                                               text="Select a task to begin"
+                                               wrapText="true"
+                                               styleClass="focus-title"/>
+
+                                        <Label fx:id="focusCountdownLabel"
+                                               text="25:00"
+                                               styleClass="focus-countdown"/>
+
+                                        <Label text="A quieter screen. One task. No clutter."
+                                               styleClass="focus-meta"/>
+                                    </VBox>
+                                </StackPane>
+                            </HBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <!-- PROFILE OVERLAY -->
+                <StackPane fx:id="profileOverlay"
+                        visible="false"
+                        managed="false"
+                        styleClass="overlay">
+
+                    <Region styleClass="overlay-scrim"
+                            onMouseClicked="#onCloseProfileClick"
+                            maxWidth="Infinity"
+                            maxHeight="Infinity"/>
+
+                    <VBox prefWidth="620"
+                        maxWidth="620"
+                        spacing="18"
+                        styleClass="profile-modal-card">
+
+                        <HBox alignment="CENTER_LEFT">
+                            <VBox spacing="3">
+                                <Label text="Profile" styleClass="profile-modal-title"/>
+                                <Label text="Update student details and course setup."
+                                    wrapText="true"
+                                    styleClass="profile-modal-subtitle"/>
+                            </VBox>
+
+                            <Region HBox.hgrow="ALWAYS"/>
+
+                            <Button text="Close"
+                                    onAction="#onCloseProfileAction"
+                                    styleClass="secondary-button"/>
+                        </HBox>
+
+                        <VBox spacing="12" styleClass="profile-section">
+                            <Label text="Student details" styleClass="profile-section-title"/>
+
+                            <HBox spacing="12">
+                                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                                    <Label text="Name" styleClass="muted"/>
+                                    <TextField fx:id="studentNameField"
+                                            promptText="Name"
+                                            HBox.hgrow="ALWAYS"/>
+                                </VBox>
+
+                                <VBox spacing="6" prefWidth="130">
+                                    <Label text="Age" styleClass="muted"/>
+                                    <Spinner fx:id="studentAgeSpinner" prefWidth="130"/>
+                                </VBox>
+                            </HBox>
+
+                            <HBox spacing="12" alignment="CENTER_LEFT">
+                                <VBox spacing="6">
+                                    <Label text="Max hours/day" styleClass="muted"/>
+                                    <Spinner fx:id="maxHoursSpinner" prefWidth="150"/>
+                                </VBox>
+
+                                <Region HBox.hgrow="ALWAYS"/>
+
+                                <Button text="Save Profile"
+                                        onAction="#onSaveProfile"
+                                        styleClass="primary-button"/>
+                            </HBox>
+                        </VBox>
+
+                        <VBox spacing="12" styleClass="profile-section">
+                            <Label text="Courses" styleClass="profile-section-title"/>
+
+	                            <HBox spacing="12" alignment="CENTER_LEFT">
+	                                <TextField fx:id="courseNameField"
+	                                        promptText="Course name"
+	                                        HBox.hgrow="ALWAYS"/>
+
+	                                <Button text="Add Course"
+	                                        onAction="#onAddCourse"
+	                                        styleClass="secondary-button"/>
+	                            </HBox>
+	                        </VBox>
+
+                        <Label text="Tip: Add courses first, then create targets from the Tasks screen."
+                            wrapText="true"
+                            styleClass="profile-tip"/>
+
+                        <!-- Hidden profile timing controls kept for controller compatibility. -->
+                        <HBox visible="false" managed="false">
+                            <Spinner fx:id="availabilityStartHourSpinner"/>
+                            <Spinner fx:id="availabilityStartMinuteSpinner"/>
+                            <Spinner fx:id="availabilityEndHourSpinner"/>
+                            <Spinner fx:id="availabilityEndMinuteSpinner"/>
+                            <Spinner fx:id="preferredStartHourSpinner"/>
+                            <Spinner fx:id="preferredStartMinuteSpinner"/>
+                            <Spinner fx:id="preferredEndHourSpinner"/>
+                            <Spinner fx:id="preferredEndMinuteSpinner"/>
+                        </HBox>
+                    </VBox>
+                </StackPane>
+
+            </StackPane>
+        </VBox>
+    </center>
+</BorderPane>

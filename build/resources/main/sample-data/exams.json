@@ -1,0 +1,18 @@
+[
+  {
+    "id": "exam-1",
+    "courseId": "cs401",
+    "title": "Algorithms Midterm",
+    "startTime": "2026-04-21T10:00:00",
+    "importance": 5,
+    "syllabusWeight": 0.4
+  },
+  {
+    "id": "exam-2",
+    "courseId": "ml210",
+    "title": "ML Quiz",
+    "startTime": "2026-04-18T11:00:00",
+    "importance": 3,
+    "syllabusWeight": 0.2
+  }
+]

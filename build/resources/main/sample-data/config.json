@@ -1,0 +1,23 @@
+{
+  "priorityWeights": {
+    "deadlineWeight": 0.55,
+    "difficultyWeight": 0.15,
+    "importanceWeight": 0.2,
+    "behaviorWeight": 0.1
+  },
+  "schedulingConfig": {
+    "maxHoursPerDay": 5.0,
+    "sessionMinutes": 75,
+    "breakMinutes": 15,
+    "planningHorizonDays": 7
+  },
+  "simulationConfig": {
+    "horizonDays": 7,
+    "scenarioCount": 4
+  },
+  "courseColors": {
+    "cs401": "#FF7A59",
+    "se302": "#4E6AF3",
+    "ml210": "#1E9E89"
+  }
+}

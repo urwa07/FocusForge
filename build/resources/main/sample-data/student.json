@@ -1,0 +1,17 @@
+{
+  "id": "student-1",
+  "name": "Urwa Khan",
+  "age": 21,
+  "maxStudyHoursPerDay": 5.0,
+  "availability": [
+    { "start": "17:00:00", "end": "22:00:00" },
+    { "start": "07:00:00", "end": "09:00:00" }
+  ],
+  "productivityProfile": {
+    "preferredWindows": [
+      { "start": "18:00:00", "end": "20:00:00" },
+      { "start": "07:00:00", "end": "08:30:00" }
+    ],
+    "dominantPattern": "PEAK_EVENING"
+  }
+}

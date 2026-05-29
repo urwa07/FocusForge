@@ -1,0 +1,5 @@
+[
+  { "id": "cs401", "name": "Algorithms", "colorHex": "#FF7A59" },
+  { "id": "se302", "name": "Software Engineering", "colorHex": "#4E6AF3" },
+  { "id": "ml210", "name": "Intro to ML", "colorHex": "#1E9E89" }
+]
